@@ -8,7 +8,7 @@ const theme: DefaultTheme = {
   accentColor: '#3B4CCA',
   accentTextLightColor: '#fff',
   accentTextDarkColor: '#3B4CCA',
-  dangerTextColor: '#FF0000',
+  dangerTextColor: '#f70000',
 
   // typography
   fontFamily: 'Roboto sans-serif',
