@@ -26,6 +26,7 @@
     "gatsby-plugin-sharp": "^3.7.1",
     "gatsby-plugin-styled-components": "^4.7.1",
     "gatsby-source-filesystem": "^3.7.1",
+    "gatsby-source-poke": "^1.0.1",
     "gatsby-transformer-sharp": "^3.7.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

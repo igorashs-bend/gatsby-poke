@@ -45,5 +45,6 @@ module.exports = {
     '@typescript-eslint/no-shadow': ['error'],
     'react/prop-types': 'off',
     'import/prefer-default-export': 'off',
+    camelcase: 'off',
   },
 };
