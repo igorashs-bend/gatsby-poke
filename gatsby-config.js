@@ -18,12 +18,5 @@ module.exports = {
       },
       __key: 'images',
     },
-    {
-      resolve: 'gatsby-plugin-google-fonts',
-      options: {
-        fonts: ['Roboto:400,700'],
-        display: 'swap',
-      },
-    },
   ],
 };
