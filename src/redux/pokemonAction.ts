@@ -1,24 +1,18 @@
 import { Pokemon } from 'types';
 import { ActionType, createAction } from 'typesafe-actions';
 // do u really need this wtf? getType ? wtf? really? or ?
-import {
-  POKEMON_ADDED,
-  POKEMON_REMOVED,
-  POKEMON_RESET,
-  POKEMON_UPLOADED,
-} from './CONSTS';
 
-export const pokemonAdded = createAction(POKEMON_ADDED, (id: string) => id)();
+export const pokemonAdded = createAction('pokemon/Added', (id: string) => id)();
 
 export const pokemonRemoved = createAction(
-  POKEMON_REMOVED,
+  'pokemon/Removed',
   (id: string) => id,
 )();
 
-export const pokemonReset = createAction(POKEMON_RESET)();
+export const pokemonReset = createAction('pokemon/Reset')();
 
 export const pokemonUploaded = createAction(
-  POKEMON_UPLOADED,
+  'pokemon/Uploaded',
   (pokemonList: Pokemon[]) => pokemonList,
 )();
 
