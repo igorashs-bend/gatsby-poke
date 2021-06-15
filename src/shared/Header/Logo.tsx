@@ -1,17 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'gatsby';
 import logo from './logo.png';
 
 const StyledLogo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-shrink: 0;
   font-weight: 700;
+
+  a {
+    display: flex;
+    align-items: center;
+  }
 
   img {
     width: 3.5rem;
     height: 3.5rem;
   }
+
   span {
     font-size: ${({ theme }) => theme.h4FontSize};
     text-decoration: underline;
@@ -25,10 +30,12 @@ const Red = styled.span`
 const Logo = () => {
   return (
     <StyledLogo>
-      <img src={logo} alt="Poke Charts Logo" />
-      <span>
-        <Red>Poke</Red>Charts
-      </span>
+      <Link to="/">
+        <img src={logo} alt="Poke Charts Logo" />
+        <span>
+          <Red>Poke</Red>Charts
+        </span>
+      </Link>
     </StyledLogo>
   );
 };

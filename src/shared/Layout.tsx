@@ -5,8 +5,9 @@ import theme from 'theme';
 import { Helmet } from 'react-helmet';
 import Header from './Header';
 
-// todo Responsive Container | Mobile First
-const Container = styled.div``;
+const Container = styled.div`
+  padding: 1.75rem;
+`;
 
 const Layout: React.FC = ({ children }) => {
   return (

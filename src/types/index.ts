@@ -1,6 +1,4 @@
-declare module '*.png';
-
-export interface Pokemon {
+export interface QueryData {
   name: string;
   id: string;
   national_number: string;
@@ -13,4 +11,8 @@ export interface Pokemon {
   sprites: {
     normal: string;
   };
+}
+
+export interface Pokemon extends QueryData {
+  selected: boolean;
 }

@@ -8,7 +8,8 @@ const StyledHeader = styled.header`
   align-items: center;
   gap: 1rem;
   padding: 1.75rem;
-  height: 7rem;
+  min-height: 7rem;
+  flex-wrap: wrap;
   background-color: ${({ theme }) => theme.primaryColor};
 `;
 

@@ -5,7 +5,7 @@ import Layout from 'shared/Layout';
 const IndexPage = () => {
   return (
     <Layout>
-      <h1>Heyo, home page</h1>
+      <h1>Choose your pokemon</h1>
       <PokemonList />
     </Layout>
   );

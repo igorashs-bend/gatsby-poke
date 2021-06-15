@@ -8,7 +8,7 @@ const MyPokemons = () => {
 
   return (
     <Layout>
-      <p>my pokemons</p>
+      <h1>My Pokemons</h1>
       <ul>
         {selectedPokemons.map((poke) => (
           <li key={poke.id}>

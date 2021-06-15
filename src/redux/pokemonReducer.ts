@@ -23,23 +23,62 @@ const pokemonReducer = (state = initialState, action: PokemonAction) => {
   switch (action.type) {
     case getType(pokemonAdded): {
       console.log('added', action.payload);
+
+      if (state.selectedList.find((p) => p.id === action.payload)) return state;
+
       const poke = state.list.find((p) => p.id === action.payload);
 
-      if (poke)
-        return { ...state, selectedList: [...state.selectedList, poke] };
+      if (!poke) return state;
 
-      return state;
+      const selectedPoke = { ...poke, selected: true };
+      const list = state.list.map((p) =>
+        p.id === action.payload ? selectedPoke : p,
+      );
+
+      return {
+        ...state,
+        list,
+        selectedList: [...state.selectedList, selectedPoke],
+      };
     }
 
-    case getType(pokemonRemoved):
+    case getType(pokemonRemoved): {
       console.log('removed');
 
-      return state;
+      const poke = state.list.find((p) => p.id === action.payload);
 
-    case getType(pokemonReset):
+      if (!poke) return state;
+
+      const selectedList = state.selectedList.filter(
+        (p) => p.id !== action.payload,
+      );
+
+      const unselectedPoke = { ...poke, selected: false };
+      const list = state.list.map((p) =>
+        p.id === action.payload ? unselectedPoke : p,
+      );
+
+      return {
+        ...state,
+        list,
+        selectedList,
+      };
+    }
+
+    case getType(pokemonReset): {
       console.log('reset');
 
-      return state;
+      const list = state.list.map((p) =>
+        p.selected ? { ...p, selected: false } : p,
+      );
+      const selectedList: Pokemon[] = [];
+
+      return {
+        ...state,
+        list,
+        selectedList,
+      };
+    }
 
     case getType(pokemonUploaded): {
       console.log('uploaded');

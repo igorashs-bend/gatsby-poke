@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const StyledUl = styled.ul`
   display: flex;
   gap: 1.75rem;
+  flex-wrap: wrap;
 
   a {
     text-decoration: none;
@@ -19,7 +20,6 @@ const StyledUl = styled.ul`
 `;
 
 const links = [
-  { path: '/', value: 'Home' },
   { path: '/my-pokemons', value: 'My Pokemons' },
   { path: '/charts', value: 'Charts' },
 ];

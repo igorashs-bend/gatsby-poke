@@ -11,8 +11,6 @@ const theme: DefaultTheme = {
   dangerTextColor: '#f70000',
 
   // typography
-  fontUrl:
-    'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap',
   fontFamily: 'Roboto sans-serif',
   bodyText: '16px',
   bodyLineHeight: 1.75,
