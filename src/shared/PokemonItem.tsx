@@ -38,11 +38,14 @@ const Stats = styled.p`
   flex-direction: column;
 `;
 
-const PokemonItem: React.FC<{ pokemon: Pokemon }> = ({ pokemon }) => {
+const PokemonItem: React.FC<{ pokemon: Pokemon; selected: boolean }> = ({
+  pokemon,
+  selected,
+}) => {
   const dispatch = useDispatch();
 
   const handleClick = (p: Pokemon) => {
-    if (p.selected) {
+    if (selected) {
       dispatch(pokemonRemoved(p.id));
     } else {
       dispatch(pokemonAdded(p.id));
@@ -66,7 +69,7 @@ const PokemonItem: React.FC<{ pokemon: Pokemon }> = ({ pokemon }) => {
         </Stats>
       </SecondaryInfo>
       <Button onClick={() => handleClick(pokemon)} type="button">
-        {pokemon.selected ? 'Unselect' : 'Select'}
+        {selected ? 'Unselect' : 'Select'}
       </Button>
     </StyledPoke>
   );

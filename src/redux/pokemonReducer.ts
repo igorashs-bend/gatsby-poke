@@ -30,14 +30,10 @@ const pokemonReducer = (state = initialState, action: PokemonAction) => {
 
       if (!poke) return state;
 
-      const selectedPoke = { ...poke, selected: true };
-      const list = state.list.map((p) =>
-        p.id === action.payload ? selectedPoke : p,
-      );
+      const selectedPoke = { ...poke };
 
       return {
         ...state,
-        list,
         selectedList: [...state.selectedList, selectedPoke],
       };
     }
@@ -53,14 +49,8 @@ const pokemonReducer = (state = initialState, action: PokemonAction) => {
         (p) => p.id !== action.payload,
       );
 
-      const unselectedPoke = { ...poke, selected: false };
-      const list = state.list.map((p) =>
-        p.id === action.payload ? unselectedPoke : p,
-      );
-
       return {
         ...state,
-        list,
         selectedList,
       };
     }
@@ -68,14 +58,10 @@ const pokemonReducer = (state = initialState, action: PokemonAction) => {
     case getType(pokemonReset): {
       console.log('reset');
 
-      const list = state.list.map((p) =>
-        p.selected ? { ...p, selected: false } : p,
-      );
       const selectedList: Pokemon[] = [];
 
       return {
         ...state,
-        list,
         selectedList,
       };
     }

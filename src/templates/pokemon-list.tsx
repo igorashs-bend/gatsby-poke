@@ -5,6 +5,8 @@ import { QueryData } from 'types';
 import styled from 'styled-components';
 import PokemonItem from 'shared/PokemonItem';
 import Pagination from 'shared/Pagination';
+import { useSelector } from 'react-redux';
+import { selectPokemonSelectedList } from 'redux/pokemonReducer';
 
 export interface DataProps {
   data: {
@@ -54,12 +56,17 @@ export const query = graphql`
 `;
 
 const PokemonList: React.FC<DataProps> = ({ data, pageContext }) => {
+  const selectedPokemons = useSelector(selectPokemonSelectedList);
+
   return (
     <Layout>
       <UL>
         {data.allPokemons.edges.map(({ node }) => (
           <li key={node.id}>
-            <PokemonItem pokemon={node} />
+            <PokemonItem
+              pokemon={node}
+              selected={!!selectedPokemons.find(({ id }) => id === node.id)}
+            />
           </li>
         ))}
       </UL>
