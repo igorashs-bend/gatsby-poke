@@ -4,7 +4,7 @@ import { pokemonReset } from 'redux/pokemonAction';
 import { selectPokemonList } from 'redux/pokemonReducer';
 import styled from 'styled-components';
 import Button from 'shared/Button';
-import PokemonItem from './Pokemon';
+import PokemonItem from '../PokemonItem';
 
 const UL = styled.ul`
   padding: 2rem;

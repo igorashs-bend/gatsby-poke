@@ -14,5 +14,5 @@ export interface QueryData {
 }
 
 export interface Pokemon extends QueryData {
-  selected: boolean;
+  selected?: boolean;
 }

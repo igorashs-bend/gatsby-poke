@@ -30,6 +30,7 @@ const SecondaryInfo = styled.div`
 const PokeImg = styled.img`
   width: 128px;
   height: 128px;
+  image-rendering: pixelated;
 `;
 
 const Stats = styled.p`
