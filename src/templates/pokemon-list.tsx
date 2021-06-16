@@ -28,7 +28,7 @@ export interface DataProps {
 const UL = styled.ul`
   display: grid;
   padding-bottom: 1.75rem;
-  grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
   gap: 2rem;
 `;
 
