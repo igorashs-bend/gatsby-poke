@@ -29,7 +29,9 @@ const Navbar = () => {
     <StyledUl>
       {links.map(({ path, value }) => (
         <li key={path}>
-          <Link to={path}>{value}</Link>
+          <Link to={path} activeStyle={{ textDecoration: 'underline' }}>
+            {value}
+          </Link>
         </li>
       ))}
     </StyledUl>
