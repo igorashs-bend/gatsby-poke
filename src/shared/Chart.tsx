@@ -1,15 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  // selectPokemonList,
-  selectPokemonSelectedList,
-} from 'redux/pokemonReducer';
+import { selectPokemonSelectedList } from 'redux/pokemonReducer';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
+import am4themes_animated from '@amcharts/amcharts4/themes/animated';
+
+am4core.useTheme(am4themes_animated);
 
 const Chart = () => {
   const selectedPokemons = useSelector(selectPokemonSelectedList);
-  // const selectedPokemons = useSelector(selectPokemonList);
   const chartRef = useRef<am4charts.XYChart>();
 
   useEffect(() => {

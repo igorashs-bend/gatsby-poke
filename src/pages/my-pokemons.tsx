@@ -6,8 +6,8 @@ import PokemonSmallItem from 'shared/PokemonSmallItem';
 import styled from 'styled-components';
 
 const UL = styled.ul`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.75rem;
 `;
 

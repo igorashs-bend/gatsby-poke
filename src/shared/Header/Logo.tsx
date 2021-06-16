@@ -30,7 +30,7 @@ const Red = styled.span`
 const Logo = () => {
   return (
     <StyledLogo>
-      <Link to="/">
+      <Link to="/pokemons">
         <img src={logo} alt="Poke Charts Logo" />
         <span>
           <Red>Poke</Red>Charts

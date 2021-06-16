@@ -24,7 +24,7 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'Poke Charts',
-        shot_name: 'Poke Charts',
+        short_name: 'Poke Charts',
         start_url: '/pokemons',
         display: `standalone`,
         background_color: '#3B4CCA',
