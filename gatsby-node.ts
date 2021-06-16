@@ -1,6 +1,9 @@
-const path = require('path');
+import { GatsbyNode } from 'gatsby';
+import path from 'path';
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
+  actions,
+}) => {
   actions.setWebpackConfig({
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
@@ -8,10 +11,23 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   });
 };
 
-exports.createPages = async ({ graphql, actions }) => {
+interface GraphQlRes {
+  allPokemons: {
+    edges: {
+      node: {
+        name: string;
+      };
+    }[];
+  };
+}
+
+export const createPages: GatsbyNode['createPages'] = async ({
+  graphql,
+  actions,
+}) => {
   const { createPage } = actions;
 
-  const res = await graphql(`
+  const res = await graphql<GraphQlRes>(`
     query {
       allPokemons {
         edges {
@@ -22,6 +38,8 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `);
+
+  if (!res.data) throw new Error('in createPages, res.data is undefined');
 
   const { edges } = res.data.allPokemons;
 
