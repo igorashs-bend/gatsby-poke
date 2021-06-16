@@ -11,6 +11,7 @@ const StyledHeader = styled.header`
   min-height: 7rem;
   flex-wrap: wrap;
   background-color: ${({ theme }) => theme.primaryColor};
+  box-shadow: 0px 0px 5px 1px #333;
 `;
 
 const Header = () => {

@@ -26,8 +26,8 @@ export interface DataProps {
 }
 
 const UL = styled.ul`
-  padding: 2rem;
   display: grid;
+  padding-bottom: 1.75rem;
   grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
   gap: 2rem;
 `;
@@ -70,7 +70,11 @@ const PokemonList: React.FC<DataProps> = ({ data, pageContext }) => {
           </li>
         ))}
       </UL>
-      <Pagination base="/pokemons" numPages={pageContext.numPages} />
+      <Pagination
+        base="/pokemons"
+        numPages={pageContext.numPages}
+        currentPage={pageContext.currentPage}
+      />
     </Layout>
   );
 };

@@ -9,7 +9,12 @@ const config: GatsbyConfig = {
     'gatsby-plugin-gatsby-cloud',
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sharp',
+    {
+      resolve: 'gatsby-plugin-sharp',
+      options: {
+        icon: './src/images/favicon.png',
+      },
+    },
     'gatsby-transformer-sharp',
     'gatsby-source-poke',
     {

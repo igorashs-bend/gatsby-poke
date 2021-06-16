@@ -21,6 +21,10 @@ const Button = styled.button<ButtonProps>`
   :hover {
     filter: brightness(1.1);
   }
+
+  :disabled {
+    filter: opacity(0.6);
+  }
 `;
 
 export default Button;
