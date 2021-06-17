@@ -116,6 +116,8 @@ const PokemonStatsRadar: React.FC<{ pokemon: Pokemon }> = ({ pokemon }) => {
 
     chart.cursor = new am4charts.RadarCursor();
 
+    chartRef.current = chart;
+
     return () => chartRef.current?.dispose();
   }, [pokemon, theme, pokemon.id]);
 
