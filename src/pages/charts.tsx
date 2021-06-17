@@ -5,7 +5,6 @@ import Chart from 'shared/Chart';
 const charts = () => {
   return (
     <Layout>
-      <p>charts</p>
       <Chart />
     </Layout>
   );

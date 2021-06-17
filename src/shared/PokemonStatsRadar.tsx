@@ -22,6 +22,8 @@ const PokemonStatsRadar: React.FC<{ pokemon: Pokemon }> = ({ pokemon }) => {
       am4charts.RadarChart,
     );
 
+    chart.exporting.menu = new am4core.ExportMenu();
+
     const { hp, attack, speed, defense, sp_atk, sp_def } = pokemon;
 
     chart.data = [
@@ -33,19 +35,27 @@ const PokemonStatsRadar: React.FC<{ pokemon: Pokemon }> = ({ pokemon }) => {
       { stat: 'SPDEF', value: sp_def },
     ];
 
-    // create axes
+    // category axis
     const categoryAxis = chart.xAxes.push(
       new am4charts.CategoryAxis<am4charts.AxisRendererCircular>(),
     );
     categoryAxis.dataFields.category = 'stat';
     categoryAxis.tooltip!.disabled = true;
+    categoryAxis.renderer.grid.template.strokeWidth = 5;
+    categoryAxis.renderer.labels.template.fontWeight = 'bold';
 
+    // value axis
     const valueAxis = chart.yAxes.push(
       new am4charts.ValueAxis<am4charts.AxisRendererRadial>(),
     );
 
+    valueAxis.renderer.grid.template.stroke = am4core.color('#006f77');
+    valueAxis.renderer.grid.template.strokeWidth = 5;
+    valueAxis.renderer.labels.template.fontWeight = 'bold';
+    valueAxis.zIndex = 3;
     valueAxis.renderer.gridType = 'polygons';
 
+    // average series
     const avgSeries = chart.series.push(new am4charts.RadarSeries());
     avgSeries.name = 'average';
     avgSeries.dataFields.valueY = 'value';
@@ -64,7 +74,14 @@ const PokemonStatsRadar: React.FC<{ pokemon: Pokemon }> = ({ pokemon }) => {
     avgSeries.fillOpacity = 0.5;
     avgSeries.strokeOpacity = 0.5;
     avgSeries.tooltipText = 'avg {valueY}';
+    avgSeries.adapter.add('tooltipText', (text, target) => {
+      if (target.dataItem) return `- ${text} -`;
 
+      return text;
+    });
+    avgSeries.showOnInit = false;
+
+    // stats series
     const series = chart.series.push(new am4charts.RadarSeries());
     series.name = 'stats';
     series.dataFields.valueY = 'value';
@@ -75,7 +92,25 @@ const PokemonStatsRadar: React.FC<{ pokemon: Pokemon }> = ({ pokemon }) => {
     series.strokeOpacity = 0.6;
     series.fill = am4core.color(`${theme.accentColor}`);
     series.stroke = am4core.color(`${theme.accentTextDarkColor}`);
-    series.bullets.push(new am4charts.CircleBullet());
+
+    const circleBullets = series.bullets.push(new am4charts.CircleBullet());
+    circleBullets.events.on('hit', (e) => {
+      const dataItem = e.target.dataItem as am4charts.RadarSeriesDataItem;
+
+      // eslint-disable-next-line no-alert
+      alert(`clicked on:  ${dataItem.categoryX} ${dataItem.valueY}`);
+    });
+    series.showOnInit = false;
+
+    circleBullets.stroke = am4core.color('#54a1df');
+    series.heatRules.push({
+      target: circleBullets,
+      property: 'fill',
+      min: am4core.color('#00a116'),
+      max: am4core.color('#b9ffc3'),
+      dataField: 'valueY',
+      logarithmic: true,
+    });
 
     chart.legend = new am4charts.Legend();
 

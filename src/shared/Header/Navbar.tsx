@@ -21,7 +21,7 @@ const StyledUl = styled.ul`
 
 const links = [
   { path: '/my-pokemons', value: 'My Pokemons' },
-  { path: '/charts', value: 'Charts' },
+  { path: '/charts', value: 'Compare' },
 ];
 
 const Navbar = () => {

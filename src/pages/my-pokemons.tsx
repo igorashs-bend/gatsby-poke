@@ -16,7 +16,6 @@ const MyPokemons = () => {
 
   return (
     <Layout>
-      <h1>My Pokemons</h1>
       <UL>
         {selectedPokemons.map((poke) => (
           <li key={poke.id}>
