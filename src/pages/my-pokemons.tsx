@@ -15,13 +15,12 @@ const UL = styled.ul<{ hide: boolean }>`
 const MyPokemons = () => {
   const selectedPokemons = useSelector(selectPokemonSelectedList);
   const [isLoading, setIsLoading] = useState(true);
-  const loadedCharts = useRef<boolean[]>([]);
+  const loadedCount = useRef(0);
 
   const handleOnReady = () => {
-    loadedCharts.current.push(true);
+    loadedCount.current += 1;
 
-    if (loadedCharts.current.length === selectedPokemons.length)
-      setIsLoading(false);
+    if (loadedCount.current === selectedPokemons.length) setIsLoading(false);
   };
 
   return (

@@ -31,8 +31,9 @@ const Chart = () => {
     // valueAxis
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.title.text = 'Values';
-    valueAxis.tooltip!.disabled = true;
-    valueAxis.renderer.minWidth = 10;
+    // valueAxis.tooltip!.disabled = true;
+    valueAxis.numberFormatter = new am4core.NumberFormatter();
+    valueAxis.numberFormatter.numberFormat = '#.00';
 
     const valueBreak = valueAxis.axisBreaks.create();
     valueBreak.startValue = 60;
