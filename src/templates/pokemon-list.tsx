@@ -1,5 +1,4 @@
 import React from 'react';
-import Layout from 'shared/Layout';
 import { graphql } from 'gatsby';
 import { QueryData } from 'types';
 import styled from 'styled-components';
@@ -59,7 +58,7 @@ const PokemonList: React.FC<DataProps> = ({ data, pageContext }) => {
   const selectedPokemons = useSelector(selectPokemonSelectedList);
 
   return (
-    <Layout>
+    <>
       <UL>
         {data.allPokemons.edges.map(({ node }) => (
           <li key={node.id}>
@@ -75,7 +74,7 @@ const PokemonList: React.FC<DataProps> = ({ data, pageContext }) => {
         numPages={pageContext.numPages}
         currentPage={pageContext.currentPage}
       />
-    </Layout>
+    </>
   );
 };
 

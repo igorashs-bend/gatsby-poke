@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Layout from 'shared/Layout';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 
@@ -10,10 +9,10 @@ const StyledLink = styled(Link)`
 
 const IndexPage = () => {
   return (
-    <Layout>
+    <>
       <h1>Choose your pokemon</h1>
       <StyledLink to="/pokemons">Here</StyledLink>
-    </Layout>
+    </>
   );
 };
 

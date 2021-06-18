@@ -12,7 +12,10 @@ const StyledPoke = styled.div`
   gap: 1rem;
 `;
 
-const PokemonSmallItem: React.FC<{ pokemon: Pokemon }> = ({ pokemon }) => {
+const PokemonSmallItem: React.FC<{ pokemon: Pokemon; onReady: () => void }> = ({
+  pokemon,
+  onReady,
+}) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -22,7 +25,7 @@ const PokemonSmallItem: React.FC<{ pokemon: Pokemon }> = ({ pokemon }) => {
   return (
     <StyledPoke>
       <h4>{pokemon.name}</h4>
-      <PokemonStatsRadar pokemon={pokemon} />
+      <PokemonStatsRadar pokemon={pokemon} onReady={onReady} />
       <Button danger onClick={handleClick}>
         Remove
       </Button>

@@ -19,6 +19,8 @@ const Chart = () => {
       name: poke.name,
     }));
     chart.data = nameData;
+    chart.exporting.menu = new am4core.ExportMenu();
+    chart.exporting.menu.align = 'left';
 
     // categoryAxis
     const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -31,6 +33,21 @@ const Chart = () => {
     valueAxis.title.text = 'Values';
     valueAxis.tooltip!.disabled = true;
     valueAxis.renderer.minWidth = 10;
+
+    const valueBreak = valueAxis.axisBreaks.create();
+    valueBreak.startValue = 60;
+    valueBreak.endValue = 100;
+    valueBreak.breakSize = 0.1;
+
+    valueBreak.events.on('over', () => {
+      valueBreak.breakSize = 1;
+      valueBreak.opacity = 0.1;
+    });
+
+    valueBreak.events.on('out', () => {
+      valueBreak.breakSize = 0.1;
+      valueBreak.opacity = 1;
+    });
 
     // hp
     chart.series.push(
@@ -187,8 +204,8 @@ const Chart = () => {
     chart.cursor.lineX.disabled = true;
     chart.cursor.lineY.disabled = true;
 
-    const scrollBarX = new am4charts.XYChartScrollbar();
-    chart.scrollbarX = scrollBarX;
+    chart.scrollbarX = new am4core.Scrollbar();
+    chart.scrollbarY = new am4core.Scrollbar();
 
     chart.legend = new am4charts.Legend();
 
