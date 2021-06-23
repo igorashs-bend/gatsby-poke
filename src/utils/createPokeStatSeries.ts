@@ -161,6 +161,29 @@ const createPokeStatSeries = ({ data, options }: CreatePokeStatSeries) => {
     options: { ...options.avgSeries, categoryX: 'name', valueY: 'value' },
   });
 
+  const maxData = data.map((i) => ({ ...i, value: maxValue }));
+
+  const maxSeries = createStepLineSeries({
+    data: maxData,
+    options: {
+      name: '',
+      color: options.avgSeries.color,
+      tooltipText: '',
+      categoryX: 'name',
+      valueY: 'value',
+    },
+  });
+
+  maxSeries.hiddenInLegend = true;
+
+  avgSeries.events.on('hidden', () => {
+    maxSeries.hide();
+  });
+
+  avgSeries.events.on('shown', () => {
+    maxSeries.show();
+  });
+
   if (options.ranges)
     createRanges({
       ...options.ranges,
@@ -169,7 +192,7 @@ const createPokeStatSeries = ({ data, options }: CreatePokeStatSeries) => {
       maxValue,
     });
 
-  return [statSeries, avgSeries];
+  return [statSeries, avgSeries, maxSeries];
 };
 
 export default createPokeStatSeries;

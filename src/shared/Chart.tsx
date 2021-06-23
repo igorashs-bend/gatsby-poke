@@ -1,16 +1,24 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectPokemonSelectedList } from 'redux/pokemonReducer';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import createPokeStatSeries from 'utils/createPokeStatSeries';
+import styled from 'styled-components';
 
 am4core.useTheme(am4themes_animated);
+
+const StyledChart = styled.div<{ hide: boolean }>`
+  height: 520px;
+
+  ${({ hide }) => hide && 'visibility: hidden;'}
+`;
 
 const Chart = () => {
   const selectedPokemons = useSelector(selectPokemonSelectedList);
   const chartRef = useRef<am4charts.XYChart>();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const chart = am4core.create('pokechart', am4charts.XYChart);
@@ -22,6 +30,8 @@ const Chart = () => {
     chart.data = nameData;
     chart.exporting.menu = new am4core.ExportMenu();
     chart.exporting.menu.align = 'left';
+
+    chart.events.on('ready', () => setIsLoading(false));
 
     // categoryAxis
     const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -166,7 +176,10 @@ const Chart = () => {
   }, [selectedPokemons]);
 
   return !selectedPokemons.length ? null : (
-    <div id="pokechart" style={{ height: '520px' }} />
+    <>
+      {isLoading && !!selectedPokemons.length && <h5>loading...</h5>}
+      <StyledChart id="pokechart" hide={isLoading} />
+    </>
   );
 };
 
