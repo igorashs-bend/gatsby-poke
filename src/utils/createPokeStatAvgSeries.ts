@@ -5,8 +5,8 @@ export interface CreateColumnSeries {
   data: unknown[];
   options: {
     name: string;
-    categoryX: string;
-    valueY: string;
+    categoryX?: string;
+    valueY?: string;
     tooltipText: string;
     minColor: am4core.Color;
     maxColor: am4core.Color;
@@ -17,12 +17,13 @@ export const createColumnSeries = ({ data, options }: CreateColumnSeries) => {
   const series = new am4charts.ColumnSeries();
   series.name = options.name;
   series.data = data;
-  series.dataFields.valueY = options.valueY;
-  series.dataFields.categoryX = options.categoryX;
+  series.dataFields.valueY = options.valueY ?? 'value';
+  series.dataFields.categoryX = options.categoryX ?? 'name';
   series.columns.template.stroke = options.minColor;
   series.columns.template.fill = options.minColor;
   series.strokeWidth = 2;
   series.tooltipText = options.tooltipText;
+  series.columns.template.width = am4core.percent(100);
   series.heatRules.push({
     target: series.columns.template,
     property: 'fill',
@@ -39,8 +40,8 @@ export interface CreateStepLineSeries {
   data: unknown[];
   options: {
     name: string;
-    categoryX: string;
-    valueY: string;
+    categoryX?: string;
+    valueY?: string;
     tooltipText: string;
     color: am4core.Color;
   };
@@ -53,8 +54,8 @@ export const createStepLineSeries = ({
   const series = new am4charts.StepLineSeries();
   series.name = options.name;
   series.data = data;
-  series.dataFields.valueY = options.valueY;
-  series.dataFields.categoryX = options.categoryX;
+  series.dataFields.valueY = options.valueY ?? 'value';
+  series.dataFields.categoryX = options.categoryX ?? 'name';
   series.tooltipText = options.tooltipText;
   series.stroke = options.color;
   series.strokeWidth = 2;
@@ -116,7 +117,7 @@ export const createRanges = ({
   });
 };
 
-export interface CreatePokeStatSeries {
+export interface CreatePokeStatAvgSeries {
   data: { name: string; value: number }[];
   options: {
     statSeries: {
@@ -143,10 +144,13 @@ export interface CreatePokeStatSeries {
   };
 }
 
-const createPokeStatSeries = ({ data, options }: CreatePokeStatSeries) => {
+const createPokeStatAvgSeries = ({
+  data,
+  options,
+}: CreatePokeStatAvgSeries) => {
   const statSeries = createColumnSeries({
     data,
-    options: { ...options.statSeries, categoryX: 'name', valueY: 'value' },
+    options: options.statSeries,
   });
 
   const avgValue = data.reduce((t, p) => t + p.value, 0) / data.length;
@@ -158,7 +162,7 @@ const createPokeStatSeries = ({ data, options }: CreatePokeStatSeries) => {
 
   const avgSeries = createStepLineSeries({
     data: avgData,
-    options: { ...options.avgSeries, categoryX: 'name', valueY: 'value' },
+    options: options.avgSeries,
   });
 
   const maxData = data.map((i) => ({ ...i, value: maxValue }));
@@ -169,8 +173,6 @@ const createPokeStatSeries = ({ data, options }: CreatePokeStatSeries) => {
       name: '',
       color: options.avgSeries.color,
       tooltipText: '',
-      categoryX: 'name',
-      valueY: 'value',
     },
   });
 
@@ -195,4 +197,4 @@ const createPokeStatSeries = ({ data, options }: CreatePokeStatSeries) => {
   return [statSeries, avgSeries, maxSeries];
 };
 
-export default createPokeStatSeries;
+export default createPokeStatAvgSeries;

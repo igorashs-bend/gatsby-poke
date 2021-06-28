@@ -1,11 +1,24 @@
 import React from 'react';
-import Chart from 'shared/Chart';
+import AvgComparisonChart from 'shared/AvgComparisonChart';
+import styled from 'styled-components';
+import BubbleStatCharts from 'shared/BubbleStatCharts';
+
+const UL = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+`;
 
 const charts = () => {
   return (
-    <>
-      <Chart />
-    </>
+    <UL>
+      <li>
+        <AvgComparisonChart />
+      </li>
+      <li>
+        <BubbleStatCharts />
+      </li>
+    </UL>
   );
 };
 

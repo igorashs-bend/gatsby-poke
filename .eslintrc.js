@@ -1,7 +1,4 @@
 module.exports = {
-  globals: {
-    __PATH_PREFIX__: true,
-  },
   env: {
     browser: true,
     es2021: true,
@@ -15,7 +12,7 @@ module.exports = {
   },
 
   extends: [
-    'react-app',
+    'plugin:react/recommended',
     'airbnb',
     'prettier/prettier',
     'plugin:prettier/recommended',

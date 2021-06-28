@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import PokemonItem from 'shared/PokemonItem';
 import Pagination from 'shared/Pagination';
 import { useSelector } from 'react-redux';
-import { selectPokemonSelectedList } from 'redux/pokemonReducer';
+import { selectPokemonSelectedList } from 'redux-store/pokemonReducer';
 
 export interface DataProps {
   data: {

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectPokemonSelectedList } from 'redux/pokemonReducer';
+import { selectPokemonSelectedList } from 'redux-store/pokemonReducer';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-import createPokeStatSeries from 'utils/createPokeStatSeries';
+import createPokeStatSeries from 'utils/createPokeStatAvgSeries';
 import styled from 'styled-components';
 
 am4core.useTheme(am4themes_animated);
@@ -15,13 +15,13 @@ const StyledChart = styled.div<{ hide: boolean }>`
   ${({ hide }) => hide && 'visibility: hidden;'}
 `;
 
-const Chart = () => {
+const AvgComparisonChart = () => {
   const selectedPokemons = useSelector(selectPokemonSelectedList);
   const chartRef = useRef<am4charts.XYChart>();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const chart = am4core.create('pokechart', am4charts.XYChart);
+    const chart = am4core.create('avg-pokechart', am4charts.XYChart);
     chart.paddingRight = 20;
 
     const nameData = selectedPokemons.map((poke) => ({
@@ -31,6 +31,11 @@ const Chart = () => {
     chart.exporting.menu = new am4core.ExportMenu();
     chart.exporting.menu.align = 'left';
 
+    const title = chart.titles.create();
+    title.text = 'Average Stats';
+    title.fontWeight = '700';
+    title.fontSize = 28;
+
     chart.events.on('ready', () => setIsLoading(false));
 
     // categoryAxis
@@ -38,6 +43,8 @@ const Chart = () => {
     categoryAxis.dataFields.category = 'name';
     categoryAxis.title.text = 'Pokemons';
     categoryAxis.renderer.grid.template.location = 0;
+    categoryAxis.renderer.cellStartLocation = 0.1;
+    categoryAxis.renderer.cellEndLocation = 0.9;
 
     // valueAxis
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
@@ -178,9 +185,9 @@ const Chart = () => {
   return !selectedPokemons.length ? null : (
     <>
       {isLoading && !!selectedPokemons.length && <h5>loading...</h5>}
-      <StyledChart id="pokechart" hide={isLoading} />
+      <StyledChart id="avg-pokechart" hide={isLoading} />
     </>
   );
 };
 
-export default Chart;
+export default AvgComparisonChart;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { pokemonRemoved } from 'redux/pokemonAction';
+import { pokemonRemoved } from 'redux-store/pokemonAction';
 import styled from 'styled-components';
 import { Pokemon } from 'types';
 import Button from 'shared/Button';

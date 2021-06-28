@@ -1,7 +1,7 @@
 import { GatsbyBrowser } from 'gatsby';
 import React from 'react';
 import Layout from 'shared/Layout';
-import ReduxWrapper from './src/redux/ReduxWrapper';
+import ReduxWrapper from './src/redux-store/ReduxWrapper';
 
 export const wrapRootElement = ReduxWrapper;
 

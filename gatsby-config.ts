@@ -5,7 +5,7 @@ const config: GatsbyConfig = {
     title: 'Poke Charts',
   },
   plugins: [
-    'gatsby-plugin-root-import',
+    // 'gatsby-plugin-root-import',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-gatsby-cloud',
     'gatsby-plugin-image',

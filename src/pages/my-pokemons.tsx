@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectPokemonSelectedList } from 'redux/pokemonReducer';
+import { selectPokemonSelectedList } from 'redux-store/pokemonReducer';
 import PokemonSmallItem from 'shared/PokemonSmallItem';
 import styled from 'styled-components';
 

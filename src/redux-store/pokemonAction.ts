@@ -1,6 +1,5 @@
 import { Pokemon } from 'types';
 import { ActionType, createAction } from 'typesafe-actions';
-// do u really need this wtf? getType ? wtf? really? or ?
 
 export const pokemonAdded = createAction('pokemon/Added', (id: string) => id)();
 
