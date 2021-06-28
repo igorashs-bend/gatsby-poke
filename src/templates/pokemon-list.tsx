@@ -1,11 +1,16 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, navigate } from 'gatsby';
 import { QueryData } from 'types';
 import styled from 'styled-components';
 import PokemonItem from 'shared/PokemonItem';
-import Pagination from 'shared/Pagination';
 import { useSelector } from 'react-redux';
 import { selectPokemonSelectedList } from 'redux-store/pokemonReducer';
+import { Pagination } from 'antd';
+
+const StyledPagination = styled(Pagination)`
+  display: flex;
+  justify-content: center;
+`;
 
 export interface DataProps {
   data: {
@@ -17,10 +22,10 @@ export interface DataProps {
   };
 
   pageContext: {
-    limit: 12;
-    skip: 216;
-    numPages: 72;
-    currentPage: 19;
+    limit: number;
+    skip: number;
+    numPages: number;
+    currentPage: number;
   };
 }
 
@@ -69,10 +74,13 @@ const PokemonList: React.FC<DataProps> = ({ data, pageContext }) => {
           </li>
         ))}
       </UL>
-      <Pagination
-        base="/pokemons"
-        numPages={pageContext.numPages}
-        currentPage={pageContext.currentPage}
+
+      <StyledPagination
+        current={pageContext.currentPage}
+        total={pageContext.numPages}
+        pageSize={1}
+        onChange={(page) => navigate(`/pokemons/${page === 1 ? '' : page}`)}
+        simple
       />
     </>
   );
