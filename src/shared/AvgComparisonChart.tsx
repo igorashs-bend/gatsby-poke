@@ -6,6 +6,7 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import createPokeStatSeries from 'utils/createPokeStatAvgSeries';
 import styled from 'styled-components';
+import PokeSpin from 'shared/PokeSpin';
 
 am4core.useTheme(am4themes_animated);
 
@@ -184,7 +185,7 @@ const AvgComparisonChart = () => {
 
   return !selectedPokemons.length ? null : (
     <>
-      {isLoading && !!selectedPokemons.length && <h5>loading...</h5>}
+      {isLoading && !!selectedPokemons.length && <PokeSpin />}
       <StyledChart id="avg-pokechart" hide={isLoading} />
     </>
   );

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectPokemonSelectedList } from 'redux-store/pokemonReducer';
 import PokemonSmallItem from 'shared/PokemonSmallItem';
 import styled from 'styled-components';
+import PokeSpin from 'shared/PokeSpin';
 
 const UL = styled.ul<{ hide: boolean }>`
   display: grid;
@@ -25,7 +26,7 @@ const MyPokemons = () => {
 
   return (
     <>
-      {isLoading && !!selectedPokemons.length && <h5>loading...</h5>}
+      {isLoading && !!selectedPokemons.length && <PokeSpin />}
 
       <UL hide={isLoading}>
         {selectedPokemons.map((poke) => (

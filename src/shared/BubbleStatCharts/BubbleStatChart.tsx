@@ -5,6 +5,7 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import createPokeBubbleStatSeries, {
   CreateLineBulletsSeries,
 } from 'utils/createPokeBubbleStatSeries';
+import PokeSpin from 'shared/PokeSpin';
 
 am4core.useTheme(am4themes_animated);
 
@@ -79,7 +80,7 @@ const BubbleStatChart: React.FC<BubbleStatChartProps> = ({
 
   return (
     <>
-      {isLoading && <h5>loading...</h5>}
+      {isLoading && <PokeSpin />}
       <div id={chartId} />
     </>
   );
