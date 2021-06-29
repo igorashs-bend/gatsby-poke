@@ -37,7 +37,9 @@ const PokeContainer = styled.div`
 `;
 
 const ChartContainer = styled.div`
-  width: 512px;
+  width: 100%;
+  max-width: 512px;
+  min-width: 320px;
 `;
 
 const filterElements = (
