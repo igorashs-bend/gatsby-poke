@@ -8,6 +8,8 @@ import {
 } from 'redux-store/pokemonReducer';
 import { Pokemon } from 'types';
 import PokemonItem from 'shared/PokemonItem';
+import * as am4core from '@amcharts/amcharts4/core';
+import ChordChart from 'shared/ChordChart';
 
 const Container = styled.div`
   display: flex;
@@ -32,6 +34,10 @@ const StyledAutoComplete = styled(AutoComplete)`
 
 const PokeContainer = styled.div`
   width: 320px;
+`;
+
+const ChartContainer = styled.div`
+  width: 512px;
 `;
 
 const filterElements = (
@@ -72,7 +78,6 @@ const FindPoke = () => {
       <StyledAutoComplete
         options={options}
         autoFocus
-        size="large"
         onSelect={onSelect}
         onSearch={onSearch}
       >
@@ -84,12 +89,53 @@ const FindPoke = () => {
       </StyledAutoComplete>
 
       {foundPokemon && (
-        <PokeContainer>
-          <PokemonItem
-            pokemon={foundPokemon}
-            selected={!!selectedPokemons.find((p) => p.id === foundPokemon.id)}
-          />
-        </PokeContainer>
+        <>
+          <PokeContainer>
+            <PokemonItem
+              pokemon={foundPokemon}
+              selected={
+                !!selectedPokemons.find((p) => p.id === foundPokemon.id)
+              }
+            />
+          </PokeContainer>
+
+          <ChartContainer>
+            <ChordChart
+              data={[
+                {
+                  name: 'HP',
+                  value: foundPokemon.hp,
+                  color: am4core.color('#76b67088'),
+                },
+                {
+                  name: 'AT',
+                  value: foundPokemon.attack,
+                  color: am4core.color('#be3c3c7b'),
+                },
+                {
+                  name: 'DEF',
+                  value: foundPokemon.defense,
+                  color: am4core.color('#816f5379'),
+                },
+                {
+                  name: 'SP',
+                  value: foundPokemon.speed,
+                  color: am4core.color('#3cafbe7c'),
+                },
+                {
+                  name: 'SAT',
+                  value: foundPokemon.hp,
+                  color: am4core.color('#52060679'),
+                },
+                {
+                  name: 'SDF',
+                  value: foundPokemon.defense,
+                  color: am4core.color('#3f2a0579'),
+                },
+              ]}
+            />
+          </ChartContainer>
+        </>
       )}
     </Container>
   );
